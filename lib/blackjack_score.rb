@@ -3,9 +3,11 @@
 VALID_CARDS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King', 'Ace']
 
 def blackjack_score(hand)
-  #how do we translate roaylty into 10s?
-  # how do we determine the value of Aces?
-  # write three argument errors -
+
+  if (hand - VALID_CARDS != [])
+    raise ArgumentError.new("This hand contains invalid cards")
+  end
+
   values_hand = royalty_to_value(hand)
   value = values_hand.sum
 
@@ -16,7 +18,10 @@ def blackjack_score(hand)
       i += 1
     end
   end
-    #Exception here
+
+  if(value > 21)
+    raise ArgumentError.new("Value is over 21, you lose")
+  end
 
   return value
 

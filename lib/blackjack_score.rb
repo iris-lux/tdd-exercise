@@ -4,9 +4,10 @@ VALID_CARDS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King', 'Ace']
 
 def blackjack_score(hand)
 
-  if (hand - VALID_CARDS != [])
-    raise ArgumentError.new("This hand contains invalid cards")
-  end
+  raise ArgumentError.new("Error: Hand is nil") if hand.nil?
+  raise ArgumentError.new("Error: Hand is empty") if hand.length == 0
+  raise ArgumentError.new("Error: This hand contains more than 5 cards") if hand.length > 5
+  raise ArgumentError.new("Error: This hand contains invalid cards") if hand - VALID_CARDS != []
 
   values_hand = royalty_to_value(hand)
   value = values_hand.sum
@@ -19,15 +20,13 @@ def blackjack_score(hand)
     end
   end
 
-  if(value > 21)
-    raise ArgumentError.new("Value is over 21, you lose")
-  end
+  raise ArgumentError.new("Error: Value is over 21, value should remain under 21") if value > 21
 
   return value
-
 end
 
 def royalty_to_value (hand)
+
   return hand.map do |card|
     if(card == 'Ace')
       11
@@ -36,6 +35,7 @@ def royalty_to_value (hand)
     else
       card
     end
+
   end
 end
 

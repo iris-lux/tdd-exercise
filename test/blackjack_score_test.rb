@@ -73,4 +73,17 @@ describe 'Blackjack Score' do
       blackjack_score([4, 10, 'Jack', 'Jack'])
     }.must_raise ArgumentError
   end
+
+  it 'raises an ArgumentError for nil hand' do
+    expect {
+      blackjack_score(nil)
+    }.must_raise ArgumentError
+  end
+
+  it 'raises an ArgumentError for empty hand' do
+    expect {
+      blackjack_score([])
+    }.must_raise ArgumentError
+  end
 end
+
